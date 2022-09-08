@@ -17,14 +17,30 @@ export default function Home() {
   const paint = (xPos, yPos) => {
     //copy from old 2d Array
     const newPixels = CanvasLib.copyCanvas(pixels);
+    newPixels[yPos][xPos] = selColor;
+    setPixels(newPixels);
     //your code here
   };
 
   const clear = () => {
     //your code here
     //Hint : use CanvasLib.createEmptyCanvas()
+    const newPixels = CanvasLib.createEmptyCanvas();
+    setPixels(newPixels);
+  };
+  const [ids, setIds] = useState([]);
+
+  const playDisco = () => {
+    const id = setInterval(
+      () => setPixels(CanvasLib.createRandomCanvas()),
+      100
+    );
+    setIds([...ids, id]);
   };
 
+  const stopDisco = () => {
+    for (const id of ids) clearInterval(id);
+  };
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "GhostWhite" }}>
       <PainterContext.Provider value={{ selColor, setSelColor, pixels, paint }}>
@@ -36,7 +52,18 @@ export default function Home() {
           <button className="btn btn-dark" onClick={clear}>
             Clear
           </button>
-          <button className="btn btn-dark">Random Color</button>
+          <button
+            className="btn btn-dark"
+            onClick={() => setPixels(CanvasLib.createRandomCanvas)}
+          >
+            Random Color
+          </button>
+          <button className="btn btn-dark" onClick={() => playDisco()}>
+            Play Disco
+          </button>
+          <button className="btn btn-dark" onClick={() => stopDisco()}>
+            Stop Disco
+          </button>
         </div>
       </PainterContext.Provider>
     </div>

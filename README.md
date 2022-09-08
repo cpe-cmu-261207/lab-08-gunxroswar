@@ -16,3 +16,4 @@ npm run dev
 ให้นศ.ศึกษาวิธีการ build ใน **codesandbox.io** ได้จาก slide **Slide 10 - React Part One (extras)**
 
 (ใส่ URL ที่นี่)
+http://lab-08-thirachai.surge.sh/
